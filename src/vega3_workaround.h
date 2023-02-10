@@ -1,0 +1,7 @@
+#pragma once
+#ifndef MANGOHUD_VEGA3_WORKAROUND
+#define MANGOHUD_VEGA3_WORKAROUND
+
+
+
+#endif

@@ -10,6 +10,7 @@
 #ifdef HAVE_NVML
 #include "nvidia_info.h"
 #endif
+#include "vega3_workaround.h"
 
 #include "amdgpu.h"
 
@@ -71,10 +72,17 @@ nvapi_util();
 #endif
 }
 
+void vega3Workaround_getAmdGpuBusy() {
+    // TODO: Implement
+    gpu_info.load = 42;
+}
+
 void getAmdGpuInfo(){
     int64_t value = 0;
     if (metrics_path.empty()){
-        if (amdgpu.busy) {
+        if (strcmp(std::getenv("MANGOHUD_VEGA3_WORKAROUND"), "1") == 0) {
+            vega3Workaround_getAmdGpuBusy();
+        } else if (amdgpu.busy) {
             rewind(amdgpu.busy);
             fflush(amdgpu.busy);
             int value = 0;
