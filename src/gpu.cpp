@@ -73,8 +73,10 @@ nvapi_util();
 }
 
 void vega3Workaround_getAmdGpuBusy() {
-    // TODO: Implement
-    gpu_info.load = 42;
+    if (!v3w::samplerThreadRunning()) {
+        v3w::startSamplerThread();
+    }
+    gpu_info.load = (int)(v3w::getBusy() * 100);
 }
 
 void getAmdGpuInfo(){

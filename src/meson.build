@@ -55,7 +55,8 @@ vklayer_files = files(
   'blacklist.cpp',
   'file_utils.cpp',
   'amdgpu.cpp',
-  'intel.cpp'
+  'intel.cpp',
+  'vega3_workaround.cpp'
 )
 opengl_files  = []
 if ['windows', 'mingw'].contains(host_machine.system())
