@@ -72,18 +72,15 @@ nvapi_util();
 #endif
 }
 
-void vega3Workaround_getAmdGpuBusy() {
-    if (!v3w::samplerThreadRunning()) {
-        v3w::startSamplerThread();
-    }
-    gpu_info.load = (int)(v3w::getBusy() * 100);
-}
-
 void getAmdGpuInfo(){
     int64_t value = 0;
     if (metrics_path.empty()){
-        if (strcmp(std::getenv("MANGOHUD_VEGA3_WORKAROUND"), "1") == 0) {
-            vega3Workaround_getAmdGpuBusy();
+        char *vega3_workaround = std::getenv("MANGOHUD_VEGA3_WORKAROUND");
+        if (vega3_workaround && strcmp(vega3_workaround, "1") == 0) {
+            if (!v3w::samplerThreadRunning()) {
+                v3w::startSamplerThread();
+            }
+            gpu_info.load = (int)(v3w::getBusy() * 100);
         } else if (amdgpu.busy) {
             rewind(amdgpu.busy);
             fflush(amdgpu.busy);
