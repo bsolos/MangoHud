@@ -109,7 +109,6 @@ endif
 
 inc_common = [
     include_directories('include'),
-    include_directories('/usr/include/libdrm'),
 ]
 
 dep_vulkan = dependency('vulkan', required: get_option('use_system_vulkan'))
@@ -282,7 +281,6 @@ endif
 
 json_dep = dependency('nlohmann_json')
 
-libdrm_dep = cpp.find_library('drm', required: true)
 libdrm_amdgpu_dep = cpp.find_library('drm_amdgpu', required: true)
 
 subdir('src')
